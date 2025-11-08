@@ -126,7 +126,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch, nextTick, onErrorCaptured } from 'vue'
+import { ref, computed, watch, nextTick, onErrorCaptured, onUnmounted, defineComponent, h } from 'vue'
 import { ComponentCompiler } from '~/utils/componentCompiler'
 
 interface ConsoleMessage {
