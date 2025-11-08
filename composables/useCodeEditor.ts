@@ -1,4 +1,4 @@
-import { ref, computed, watch, nextTick } from 'vue'
+import { ref, computed, watch, nextTick, readonly } from 'vue'
 import { ComponentCompiler, type CompileResult } from '~/utils/componentCompiler'
 
 export interface CodeEditorState {
