@@ -341,7 +341,21 @@ ${localStyle.value}
 </style>`
 
   try {
-    await copy(fullCode)
+    if (navigator.clipboard) {
+      await navigator.clipboard.writeText(fullCode)
+    } else {
+      // Fallback for older browsers
+      const textarea = document.createElement('textarea')
+      textarea.value = fullCode
+      textarea.style.position = 'fixed'
+      textarea.style.left = '-999999px'
+      textarea.style.top = '-999999px'
+      document.body.appendChild(textarea)
+      textarea.focus()
+      textarea.select()
+      document.execCommand('copy')
+      document.body.removeChild(textarea)
+    }
     // Could show a toast notification here
   } catch (error) {
     console.error('Failed to copy code:', error)
