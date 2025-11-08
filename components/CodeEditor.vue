@@ -162,9 +162,6 @@ const templateRef = ref<HTMLTextAreaElement>()
 const scriptRef = ref<HTMLTextAreaElement>()
 const styleRef = ref<HTMLTextAreaElement>()
 
-// Clipboard
-const { copy } = useClipboard()
-
 // Computed
 const tabs = [
   { key: 'template' as const, label: 'Template' },
