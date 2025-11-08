@@ -122,7 +122,6 @@
 
 <script setup lang="ts">
 import { ref, computed, watch, nextTick } from 'vue'
-import { useClipboard, useDebounceFn } from '@vueuse/core'
 
 interface Props {
   modelValue?: {
