@@ -184,6 +184,11 @@ const styleError = computed(() => props.errors.find(error =>
   error.toLowerCase().includes('style')
 ))
 
+// Debounce timeouts
+let templateTimeout: NodeJS.Timeout | null = null
+let scriptTimeout: NodeJS.Timeout | null = null
+let styleTimeout: NodeJS.Timeout | null = null
+
 // Methods
 const getTabError = (tab: string) => {
   switch (tab) {
@@ -198,32 +203,47 @@ const getTabError = (tab: string) => {
   }
 }
 
-const updateTemplate = useDebounceFn(() => {
-  emit('update:template', localTemplate.value)
-  emit('update:modelValue', {
-    template: localTemplate.value,
-    script: localScript.value,
-    style: localStyle.value
-  })
-}, 300)
+const updateTemplate = () => {
+  if (templateTimeout) {
+    clearTimeout(templateTimeout)
+  }
+  templateTimeout = setTimeout(() => {
+    emit('update:template', localTemplate.value)
+    emit('update:modelValue', {
+      template: localTemplate.value,
+      script: localScript.value,
+      style: localStyle.value
+    })
+  }, 300)
+}
 
-const updateScript = useDebounceFn(() => {
-  emit('update:script', localScript.value)
-  emit('update:modelValue', {
-    template: localTemplate.value,
-    script: localScript.value,
-    style: localStyle.value
-  })
-}, 300)
+const updateScript = () => {
+  if (scriptTimeout) {
+    clearTimeout(scriptTimeout)
+  }
+  scriptTimeout = setTimeout(() => {
+    emit('update:script', localScript.value)
+    emit('update:modelValue', {
+      template: localTemplate.value,
+      script: localScript.value,
+      style: localStyle.value
+    })
+  }, 300)
+}
 
-const updateStyle = useDebounceFn(() => {
-  emit('update:style', localStyle.value)
-  emit('update:modelValue', {
-    template: localTemplate.value,
-    script: localScript.value,
-    style: localStyle.value
-  })
-}, 300)
+const updateStyle = () => {
+  if (styleTimeout) {
+    clearTimeout(styleTimeout)
+  }
+  styleTimeout = setTimeout(() => {
+    emit('update:style', localStyle.value)
+    emit('update:modelValue', {
+      template: localTemplate.value,
+      script: localScript.value,
+      style: localStyle.value
+    })
+  }, 300)
+}
 
 const handleKeydown = (event: KeyboardEvent) => {
   // Handle tab key for indentation
