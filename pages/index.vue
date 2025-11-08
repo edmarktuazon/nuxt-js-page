@@ -6,7 +6,6 @@
 </template>
 
 <script setup lang="ts">
-import { LearningPlayground } from '~/components/LearningPlayground.vue'
 
 // Page metadata
 useHead({
